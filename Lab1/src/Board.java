@@ -21,7 +21,7 @@ public class Board implements Ilayout, Cloneable{
     public String toString(){
         String s="";
         for(int i=0;i<dim;i++)
-            for(int j=0;j<dim;j++) 
+            for(int j=0;j<dim;j++)
                 s += String.valueOf(board[i][j]);
         return s;
     }
