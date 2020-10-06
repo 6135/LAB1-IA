@@ -1,6 +1,7 @@
 /**
  * ILayout
  */
+package app;
 public interface Ilayout {
     /**
      * @return the children of the reciever
