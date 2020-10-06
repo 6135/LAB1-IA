@@ -1,10 +1,7 @@
 package app;
 import java.util.Scanner;
 
-<<<<<<< HEAD
-=======
 import java.util.Iterator;
->>>>>>> 00ee75bcca710729f87061c8bdcf08af83ac7631
 
 public class Main {
     public static void main (String [] args) {
