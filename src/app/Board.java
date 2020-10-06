@@ -26,4 +26,25 @@ public class Board implements Ilayout, Cloneable{
                 s += String.valueOf(board[i][j]);
         return s;
     }
+
+    @Override
+    public List<Ilayout> children() {
+        // TODO Auto-generated method stub
+        return null;
+    }
+
+    @Override
+    public boolean isGoal(Ilayout I) {
+        if(toString().equals(I.toString()))
+            return true;
+        else
+            return false;
+    }
+
+    @Override
+    public double getG() {
+        // TODO Auto-generated method stub
+        return 1;
+    }
+
 }
