@@ -1,6 +1,7 @@
+package app;
 import java.util.Scanner;
 
-import javax.swing.text.html.HTMLDocument.Iterator;
+import java.util.Iterator;
 
 public class Main {
     public static void main (String [] args) {
@@ -11,7 +12,7 @@ public class Main {
 
         if(it==null) System.out.println("no solution was found");
         else{
-            while(it.has.next()){
+            while(it.hasNext()){
                 BestFirst.State i = it.next();
                 System.out.println(i);
                 if(!it.hasNext()) System.out.println(i.getG());
