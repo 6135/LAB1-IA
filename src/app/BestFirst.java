@@ -1,4 +1,8 @@
-class BestFirst{
+package app;
+
+import java.util.Queue;
+
+class BestFirst {
     static class State{
         private Ilayout layout;
         private State father;
@@ -16,6 +20,7 @@ class BestFirst{
         public double getG(){return g;}
     }
     protected Queue<State> abertos;
+    
     private List<State> fechados;
     private State actual;
     private Ilayout objective;
