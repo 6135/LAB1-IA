@@ -18,6 +18,7 @@ public class Main {
                 if(!it.hasNext()) System.out.println(i.getG());
             }
         }
+        sc.close()
     }
 
 } 
