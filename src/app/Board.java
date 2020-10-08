@@ -57,8 +57,11 @@ public class Board implements Ilayout, Cloneable {
         List<Ilayout> children = new ArrayList<>(); 
         int col = empty%dim;
         int row = (int)empty/dim;
-
-       up(row); down(row); right(col); left(col);
+        
+        if(row>0) children.add(up(row,col)); 
+        if(row<dim) children.add(down(row,col));
+        if(col<dim) children.add(right(row,col)); 
+        if(col>0) children.add(left(row,col));
 
         return children;
     }
@@ -74,44 +77,37 @@ public class Board implements Ilayout, Cloneable {
         return 1;
     }
 
-    private Ilayout up( int row){
-        Board child = new Board();
-        String str=s;
-        if(row>0){
-            
-            child = new Board(str);
-        }
+    private Ilayout up( int row,int col){
+        int newEmpty = col+(row-1)*dim;
+        Board child = new Board(movement(newEmpty));   
+
+        return child;
+    }
+
+    private Ilayout down(int row, int col){
+        int newEmpty = col+(row+1)*dim;
+        Board child = new Board(movement(newEmpty));  
+
+        return child;
+    }
+
+    private Ilayout right(int row,int col){
+        int newEmpty = (col+1)+row*dim;
+        Board child = new Board(movement(newEmpty)); 
             
         return child;
     }
 
-    private Ilayout down(int row){
-        Board child = new Board();
-        if(row>0){
-
-             child = new Board();
-        }
+    private Ilayout left(int row,int col){
+        int newEmpty = (col-1)+row*dim;
+        Board child = new Board(movement(newEmpty)); 
             
         return child;
     }
 
-    private Ilayout right(int col){
-        Board child = new Board();
-        if(row>0){
-
-             child = new Board();
-        }
-            
-        return child;
-    }
-
-    private Ilayout left(int col){
-        Board child = new Board();
-        if(row>0){
-
-             child = new Board();
-        }
-            
-        return child;
+    private String movement(int newEmpty){
+        String temp = s;
+        String str = temp.replace(temp.charAt(newEmpty), temp.charAt(empty));
+        return str.replace(temp.charAt(empty), temp.charAt(newEmpty)) ;
     }
 }
