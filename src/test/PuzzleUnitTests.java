@@ -50,4 +50,22 @@ public class PuzzleUnitTests {
         assertTrue(childrenString.contains("123475608"));   
         
     }
+
+    @Test
+    public void testSolve(){
+        //aplicar 1 exemplo do prof
+        /**
+         * 023145678
+         * 123405678
+         */
+    }
+
+    @Test
+    public void testSolve2(){
+        //aplicar 2 exemplo do prof
+        /*
+        123456780
+        436718520
+        */
+    }
 }

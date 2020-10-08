@@ -19,6 +19,10 @@ public interface Ilayout {
     */
     double getG();
     /**
+     * @return the board of the Ilayout
+     */
+    String toString();
+    /**
      * @return the long form of the Ilayout
      */
     String toStringLong();

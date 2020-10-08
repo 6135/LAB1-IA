@@ -44,6 +44,7 @@ public class Board implements Ilayout, Cloneable {
         }
         return boardFormat;
     }
+
     @Override
     public String toStringLong(){
         return s;
@@ -122,7 +123,6 @@ public class Board implements Ilayout, Cloneable {
         StringBuilder str = new StringBuilder(s);
         str.setCharAt(empty,s.charAt(newEmpty));
         str.setCharAt(newEmpty, '0');
-        System.out.println(str);
         return str.toString();
     }
 }
