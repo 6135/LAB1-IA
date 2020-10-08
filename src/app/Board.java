@@ -106,7 +106,8 @@ public class Board implements Ilayout, Cloneable {
     }
 
     private String movement(int newEmpty){
-        String str = s.replace(s.charAt(newEmpty), s.charAt(empty));
-        return str.replace(s.charAt(empty), s.charAt(newEmpty)) ;
+        String temp = s;
+        String str = temp.replace(temp.charAt(newEmpty), temp.charAt(empty));
+        return str.replace(temp.charAt(empty), temp.charAt(newEmpty)) ;
     }
 }
