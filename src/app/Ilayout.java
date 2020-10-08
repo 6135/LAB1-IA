@@ -15,8 +15,12 @@ public interface Ilayout {
      */
     boolean isGoal(Ilayout I);
     /**
-    @return the cost for moving from the input config to the receiver.
+    *@return the cost for moving from the input config to the receiver.
     */
     double getG();
+    /**
+     * @return the long form of the Ilayout
+     */
+    String toStringLong();
 }
 

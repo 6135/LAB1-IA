@@ -43,7 +43,7 @@ public class Board implements Ilayout, Cloneable {
         }
         return boardFormat;
     }
-    
+    @Override
     public String toStringLong(){
         if(s.equals(""))
             for(int i=0;i<dim;i++)
