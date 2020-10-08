@@ -7,6 +7,7 @@ public class Board implements Ilayout, Cloneable {
     private static final int dim=3;
     private int board[][];
     String s="";
+    String boardFormat="";
     int empty;
     
     public Board(){
@@ -27,11 +28,27 @@ public class Board implements Ilayout, Cloneable {
             }
 
     }
-
-    public String toString(){
-        for(int i=0;i<dim;i++)
-            for(int j=0;j<dim;j++)
-                s += String.valueOf(board[i][j]);
+    @Override
+    public String toString() {
+        if(boardFormat.equals("")){
+            String s = toStringLong();
+            for(int i = 0; i < s.length(); i++){
+                char c = s.charAt(i);
+                if(s.charAt(i) == '0')
+                    boardFormat+=" ";
+                else boardFormat+=c;
+                if((i+1)%dim == 0 && (i+1)/dim != dim)
+                    boardFormat+="\n";
+            }
+        }
+        return boardFormat;
+    }
+    
+    public String toStringLong(){
+        if(s.equals(""))
+            for(int i=0;i<dim;i++)
+                for(int j=0;j<dim;j++)
+                    s += String.valueOf(board[i][j]);
         return s;
     }
 
