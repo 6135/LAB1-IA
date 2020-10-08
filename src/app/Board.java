@@ -1,7 +1,13 @@
 package app;
-public class Board implements Ilayout, Cloneable{
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Board implements Ilayout, Cloneable {
     private static final int dim=3;
     private int board[][];
+    String s="";
+    int empty;
     
     public Board(){
         board = new int[dim][dim];
@@ -14,13 +20,15 @@ public class Board implements Ilayout, Cloneable{
 
         int si=0;
         for(int i=0;i<dim;i++)
-            for(int j=0;j<dim;j++) 
+            for(int j=0;j<dim;j++){
+                if(str.charAt(si)==0)
+                    empty=si;
                 board[i][j] = Character.getNumericValue(str.charAt(si++));
+            }
 
     }
 
     public String toString(){
-        String s="";
         for(int i=0;i<dim;i++)
             for(int j=0;j<dim;j++)
                 s += String.valueOf(board[i][j]);
@@ -29,21 +37,19 @@ public class Board implements Ilayout, Cloneable{
 
     @Override
     public List<Ilayout> children() {
-        // TODO Auto-generated method stub
+        List<Ilayout> children = new ArrayList<>(); 
+
         return null;
     }
 
     @Override
     public boolean isGoal(Ilayout I) {
-        if(toString().equals(I.toString()))
-            return true;
-        else
-            return false;
+        if(toString().equals(I.toString())) return true;
+        else return false;
     }
 
     @Override
     public double getG() {
-        // TODO Auto-generated method stub
         return 1;
     }
 
