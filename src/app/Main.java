@@ -7,7 +7,7 @@ import java.util.List;
 
 public class Main {
     public static void main (String [] args) {
-        Scanner sc = new Scanner(System.in);
+       /* Scanner sc = new Scanner(System.in);
 
         BestFirst s = new BestFirst();
         Iterator<BestFirst.State> it = s.solve(new Board(sc.next()),new Board(sc.next()));
@@ -20,8 +20,9 @@ public class Main {
                 if(!it.hasNext()) System.out.println(i.getG());
             }
         }
-        sc.close();
-
+        sc.close();*/
+        Board test = new Board("023145678");
+        test.children();
         /*List<String> list = new ArrayList<String>();
         list.add("1");
         list.add("12");

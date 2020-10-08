@@ -18,13 +18,14 @@ public class Board implements Ilayout, Cloneable {
         if(str.length() != dim*dim) throw new IllegalStateException("Invalid arg in Board constructor");
         
         board = new int[dim][dim];
-
+        s = str;
         int si=0;
         for(int i=0;i<dim;i++)
             for(int j=0;j<dim;j++){
                 if(str.charAt(si)==0)
                     empty=si;
                 board[i][j] = Character.getNumericValue(str.charAt(si++));
+               
             }
 
     }
@@ -45,10 +46,6 @@ public class Board implements Ilayout, Cloneable {
     }
     
     public String toStringLong(){
-        if(s.equals(""))
-            for(int i=0;i<dim;i++)
-                for(int j=0;j<dim;j++)
-                    s += String.valueOf(board[i][j]);
         return s;
     }
 
@@ -106,8 +103,12 @@ public class Board implements Ilayout, Cloneable {
     }
 
     private String movement(int newEmpty){
-        String temp = s;
-        String str = temp.replace(temp.charAt(newEmpty), temp.charAt(empty));
-        return str.replace(temp.charAt(empty), temp.charAt(newEmpty)) ;
+        String str = s;
+        System.out.println("temp "+str);
+        str = str.replace(s.charAt(empty),"-1");
+        str = str.replace(s.charAt(newEmpty), s.charAt(empty));
+        System.out.println("str "+str);
+        System.out.println("child "+str.replace(s.charAt(empty), s.charAt(newEmpty)));
+        return str.replace(s.charAt(newEmpty), s.charAt(empty)) ;
     }
 }
