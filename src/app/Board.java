@@ -38,8 +38,9 @@ public class Board implements Ilayout, Cloneable {
     @Override
     public List<Ilayout> children() {
         List<Ilayout> children = new ArrayList<>(); 
-
-        return null;
+        int row = empty%dim;
+        int col = ;
+        return children;
     }
 
     @Override
