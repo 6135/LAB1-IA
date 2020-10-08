@@ -37,8 +37,8 @@ public class Board implements Ilayout, Cloneable {
                 if(s.charAt(i) == '0')
                     boardFormat+=" ";
                 else boardFormat+=c;
-                if((i+1)%dim == 0 && (i+1)/dim != dim)
-                    boardFormat+="\n";
+                if((i+1)%dim == 0)
+                    boardFormat+="\r\n";
             }
         }
         return boardFormat;

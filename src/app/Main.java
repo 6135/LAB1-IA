@@ -1,7 +1,9 @@
 package app;
-import java.util.Scanner;
 
+import java.util.Scanner;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 
 public class Main {
     public static void main (String [] args) {
@@ -18,7 +20,19 @@ public class Main {
                 if(!it.hasNext()) System.out.println(i.getG());
             }
         }
-        sc.close()
+        sc.close();
+
+        /*List<String> list = new ArrayList<String>();
+        list.add("1");
+        list.add("12");
+        list.add("123");
+        list.add("1234");
+        list.add("12345");
+        Iterator<String> itr = list.iterator();
+        while(itr.hasNext())
+            System.out.println(itr.next());*/
+
+        
     }
 
 } 

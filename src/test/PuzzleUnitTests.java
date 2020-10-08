@@ -9,9 +9,6 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 public class PuzzleUnitTests {
-// Tests will go here
-public class GreetingTests {
-
     @Test
     public void testConstructor() {
         Board b = new Board("023145678");
@@ -20,7 +17,7 @@ public class GreetingTests {
         pw.println(" 23");
         pw.println("145");
         pw.println("678");
-        assertEquals(b.toString(), writer.toString());
+        assertEquals(writer.toString(), b.toString());
         pw.close();
     }
     @Test
@@ -31,7 +28,7 @@ public class GreetingTests {
         pw.println("123");
         pw.println("485");
         pw.println("67 ");
-        assertEquals(b.toString(), writer.toString());
+        assertEquals(writer.toString(), b.toString());
         pw.close();
     }
 }
