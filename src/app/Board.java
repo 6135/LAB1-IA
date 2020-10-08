@@ -28,6 +28,7 @@ public class Board implements Ilayout, Cloneable {
 
     }
 
+
     public String toString(){
         for(int i=0;i<dim;i++)
             for(int j=0;j<dim;j++)
@@ -38,8 +39,11 @@ public class Board implements Ilayout, Cloneable {
     @Override
     public List<Ilayout> children() {
         List<Ilayout> children = new ArrayList<>(); 
-        int row = empty%dim;
-        int col = ;
+        int col = empty%dim;
+        int row = (int)empty/dim;
+
+       up(row); down(row); right(col); left(col);
+
         return children;
     }
 
@@ -54,4 +58,44 @@ public class Board implements Ilayout, Cloneable {
         return 1;
     }
 
+    private Ilayout up( int row){
+        Board child = new Board();
+        String str=s;
+        if(row>0){
+            
+            child = new Board(str);
+        }
+            
+        return child;
+    }
+
+    private Ilayout down(int row){
+        Board child = new Board();
+        if(row>0){
+
+             child = new Board();
+        }
+            
+        return child;
+    }
+
+    private Ilayout right(int col){
+        Board child = new Board();
+        if(row>0){
+
+             child = new Board();
+        }
+            
+        return child;
+    }
+
+    private Ilayout left(int col){
+        Board child = new Board();
+        if(row>0){
+
+             child = new Board();
+        }
+            
+        return child;
+    }
 }
