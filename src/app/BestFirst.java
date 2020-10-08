@@ -1,8 +1,14 @@
 package app;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.PriorityQueue;
 import java.util.Queue;
+import java.util.Stack;
 
 class BestFirst {
+
     static class State{
         private Ilayout layout;
         private State father;
@@ -20,27 +26,54 @@ class BestFirst {
         public double getG(){return g;}
     }
     protected Queue<State> abertos;
-    
     private List<State> fechados;
     private State actual;
     private Ilayout objective;
+
     final private List<State> sucesssores(State n){
         List<State> sucs= new ArrayList<>();
-        List <Ilayout> children= n.layout.children();
-        for(Ilayout e :children){
-            if_(n.father == null || !e.equals(n.father.layout) ){
+        List <Ilayout> children = n.layout.children();
+        for(Ilayout e : children){
+            if(n.father == null || !e.equals(n.father.layout) ){
                 State nn=new State(e,n);
                 sucs.add(nn);
             } 
         }
         return sucs;
     }
+
     final public Iterator<State> solve(Ilayout s, Ilayout goal){
         objective=goal;
         Queue<State> abertos= new PriorityQueue<>(10,(s1,s2) -> (int) Math.signum(s1.getG()-s2.getG()));
         List<State> fechados= new ArrayList<>();
         abertos.add(new State(s,null));
         List<State> sucs;
+        Stack<State> sequencia= new Stack<>();
+        while(!abertos.isEmpty()){
+            if(abertos.isEmpty())
+               System.exit(1);
+            actual=abertos.poll();
+            if(objective.isGoal(actual.layout)){
+
+                State actualTemp = actual;
+                while(actualTemp.father!=null){
+                    sequencia.push(actualTemp);
+                    actualTemp=actualTemp.father;
+                }
+                sequencia.push(actualTemp);
+                return sequencia.iterator();
+            }
+            else {
+                sucs.add(actual.layout.children());
+                fechados.add();
+            }
+                
+
+
+
+        }
+
+
         
     }
 } 

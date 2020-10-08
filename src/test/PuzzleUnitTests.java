@@ -14,7 +14,7 @@ public class GreetingTests {
 
     @Test
     public void testConstructor() {
-    Board b = new Board("023145678");
+        Board b = new Board("023145678");
         StringWriter writer = new StringWriter();
         PrintWriter pw = new PrintWriter ( writer ) ;
         pw.println(" 23");
