@@ -65,6 +65,22 @@ public class Board implements Ilayout, Cloneable {
 
         return children;
     }
+    /**
+     * Implemented for good measure
+     * @return the hash code of the given board
+     */
+    @Override
+    public int hashCode() {
+        return toStringLong().hashCode();
+    }
+    /**
+     * Since isGoal is already a comparison fuction, this one simply calls {@link #isGoal()}
+     * @return comparison function so that contains works properly
+     */
+    @Override
+    public boolean equals(Ilayout I){
+        return isGoal(I);
+    }
 
     @Override
     public boolean isGoal(Ilayout I) {
