@@ -19,7 +19,7 @@ public class Main {
             }
         }
         sc.close();*/
-        Board test = new Board("023145678");
+        Board test = new Board("123405678");
         test.children();
         /*List<String> list = new ArrayList<String>();
         list.add("1");

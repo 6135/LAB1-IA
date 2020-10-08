@@ -22,7 +22,7 @@ public class Board implements Ilayout, Cloneable {
         int si=0;
         for(int i=0;i<dim;i++)
             for(int j=0;j<dim;j++){
-                if(str.charAt(si)==0)
+                if(str.charAt(si)=='0')
                     empty=si;
                 board[i][j] = Character.getNumericValue(str.charAt(si++));
                
@@ -56,8 +56,8 @@ public class Board implements Ilayout, Cloneable {
         int row = (int)empty/dim;
         
         if(row>0) children.add(up(row,col)); 
-        if(row<dim) children.add(down(row,col));
-        if(col<dim) children.add(right(row,col)); 
+        if(row<dim-1) children.add(down(row,col));
+        if(col<dim-1) children.add(right(row,col)); 
         if(col>0) children.add(left(row,col));
 
         return children;
@@ -119,12 +119,10 @@ public class Board implements Ilayout, Cloneable {
     }
 
     private String movement(int newEmpty){
-        String str = s;
-        System.out.println("temp "+str);
-        str = str.replace(s.charAt(empty),"-1");
-        str = str.replace(s.charAt(newEmpty), s.charAt(empty));
-        System.out.println("str "+str);
-        System.out.println("child "+str.replace(s.charAt(empty), s.charAt(newEmpty)));
-        return str.replace(s.charAt(newEmpty), s.charAt(empty)) ;
+        StringBuilder str = new StringBuilder(s);
+        str.setCharAt(empty,s.charAt(newEmpty));
+        str.setCharAt(newEmpty, '0');
+        System.out.println(str);
+        return str.toString();
     }
 }
