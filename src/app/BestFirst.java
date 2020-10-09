@@ -4,14 +4,19 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.PriorityQueue;
 import java.util.Queue;
-import java.util.Stack;
 
-class BestFirst {
-    static class State{
+public class BestFirst {
+
+    protected Queue<State> abertos;
+    private List<State> fechados;
+    private State actual;
+    private Ilayout objective;
+    
+    public static class State{
         private Ilayout layout;
         private State father;
         private double g;
-
+        
         public State(Ilayout l,State n){
             layout=l;
             father=n;
@@ -31,14 +36,11 @@ class BestFirst {
 
         public double getG(){return g;}
     }
-    protected Queue<State> abertos;
-    private List<State> fechados;
-    private State actual;
-    private Ilayout objective;
+
     final private List<State> sucesssores(State n){
-        List<State> sucs= new ArrayList<>();
-        List <Ilayout> children= n.layout.children();
-        for(Ilayout e :children){
+        List<State> sucs = new ArrayList<>();
+        List <Ilayout> children = n.layout.children();
+        for(Ilayout e : children){
             if(n.father == null || !e.equals(n.father.layout) ){
                 State nn=new State(e,n);
                 sucs.add(nn);
@@ -47,12 +49,14 @@ class BestFirst {
         return sucs;
     }
     final public Iterator<State> solve(Ilayout s, Ilayout goal){
-        objective=goal;
         Queue<State> abertos = new PriorityQueue<>(10,(s1,s2) -> (int) Math.signum(s1.getG()-s2.getG()));
-        List<State> fechados = new ArrayList<>();
-        abertos.add(new State(s,null));
         List<State> sucs;
         List<State> sequencia = new ArrayList<>();
+        objective=goal;
+        
+        fechados = new ArrayList<>();
+        abertos.add(new State(s,null));
+
         while(sequencia.isEmpty()){
             if(abertos.isEmpty())
                System.exit(1);
@@ -75,7 +79,6 @@ class BestFirst {
                     if(!fechados.contains(temp))
                         abertos.add(temp);
                 }
-
             }
         }
         
