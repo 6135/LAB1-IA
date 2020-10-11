@@ -122,6 +122,7 @@ public class PuzzleUnitTests {
         System.out.println((double)totalTime/1_000_000_000.0);
         while(itr.hasNext()) last=itr.next();
         assertEquals((int)18,(int)last.getG());
+        
     }
 }
 

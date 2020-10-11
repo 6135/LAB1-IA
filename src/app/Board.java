@@ -47,7 +47,16 @@ public class Board implements Ilayout, Cloneable {
      */
     @Override
     public int hashCode() {
-		return toString().hashCode();
+		int decimalPlace=1;
+		int hc = 0;
+		for(int r = 0; r < dim; r++)
+			for(int c = 0; c < dim; c++) {
+				if(board[r][c] != 0)
+					hc += board[r][c]*decimalPlace;
+				decimalPlace*=10;
+
+			}
+		return hc;
 	}
     /**
      * @return comparison function so that contains works properly
@@ -60,7 +69,14 @@ public class Board implements Ilayout, Cloneable {
      * @return true if the receiver equals the argument 'I'; return false otherwise
      */	
 	public boolean isGoal(Ilayout l) {
-		return toString().equals(l.toString());
+		if(l instanceof Board) {
+			int b[][] = ((Board) l).board;
+			for(int r = 0 ; r < dim; r++)
+				for(int c = 0; c < dim; c++)
+					if(board[r][c] != b[r][c])
+						return false;
+			return true;
+		} else return false;
 	}
 
 	@Override
