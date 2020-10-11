@@ -3,8 +3,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Board implements Ilayout, Cloneable {
-    private String s="";
-    private String boardFormat="";
 	private int zeroR;
 	private int zeroC;
 	private static final int dim = 3;
@@ -32,16 +30,13 @@ public class Board implements Ilayout, Cloneable {
 			}
 	}
 
-	public Board(int[][] b) {
+	public Board(int[][] b, int zr, int zc) {
+		zeroR = zr;
+		zeroC = zc;
 		board = new int[dim][dim];
 		for (int r = 0; r < dim; r++) {
 			for (int c = 0; c < dim; c++) {
 				board[r][c] = b[r][c];
-
-				if(board[r][c] == 0){
-					zeroR = r;
-					zeroC = c;
-				}
 			}
 		}
 	}
@@ -77,33 +72,28 @@ public class Board implements Ilayout, Cloneable {
 	public List<Ilayout> children() {
 																	
         List<Ilayout> list = new ArrayList<>();
-        //System.out.println(zeroR);              
-		//System.out.println(zeroC);
-		if(zeroC < dim-1) list.add(new Board(movCopy(board,zeroR,zeroC+1)));
-		if(zeroR < dim-1) list.add(new Board(movCopy(board,zeroR+1,zeroC)));
-		if(zeroC > 0) list.add(new Board(movCopy(board,zeroR,zeroC-1)));
-		if(zeroR > 0) list.add(new Board(movCopy(board,zeroR-1,zeroC)));
+		if(zeroC < dim-1) list.add(new Board(movCopy(board,zeroR,zeroC+1),zeroR,zeroC+1));
+		if(zeroR < dim-1) list.add(new Board(movCopy(board,zeroR+1,zeroC),zeroR+1,zeroC));
+		if(zeroC > 0) list.add(new Board(movCopy(board,zeroR,zeroC-1),zeroR,zeroC-1));
+		if(zeroR > 0) list.add(new Board(movCopy(board,zeroR-1,zeroC),zeroR-1,zeroC));
 		return list;
 	}
 
 	@Override
 	public String toString() {
-		String result = "";
+		String string = "";
 		for (int i = 0; i < dim; i++) {
-			for (int j = 0; j < dim; j++) {
-				if (board[i][j] == 0) {
-					result += " ";
-				} else {
-					result += board[i][j];
-				}
-			}
-			result += "\r\n";
+			for (int j = 0; j < dim; j++)
+				if (board[i][j] == 0)
+					string += " ";
+				else
+					string += board[i][j];
+			string += "\r\n";
 		}
-		return result;
+		return string;
 	}
 
     private int[][] movCopy(int[][] old, int newZeroR, int newZeroC){
-        //System.out.println(newZeroR + " " + newZeroC);
         int[][] temp = new int[dim][dim];
         for(int r = 0; r < dim; r++)
             for(int c = 0; c < dim; c++){
