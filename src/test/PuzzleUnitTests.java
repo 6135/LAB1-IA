@@ -40,22 +40,24 @@ public class PuzzleUnitTests {
         pw.close();
     }
 
-    @Test (timeout = 1000)
+    @Test (timeout = 10000)
     public void testChildren(){
+        long startTime = System.nanoTime();
         Board b = new Board("123405678");
         List<Ilayout> children = new ArrayList<Ilayout>();
         children.addAll(b.children());
-        List<String> childrenString = new ArrayList<String>();
-        for(Ilayout l : children)
-            childrenString.add(l.toStringLong());
-        assertTrue(childrenString.contains("103425678"));
-        assertTrue(childrenString.contains("123045678"));
-        assertTrue(childrenString.contains("123450678"));
-        assertTrue(childrenString.contains("123475608"));   
+        long endTime   = System.nanoTime();
+        long totalTime = endTime - startTime;
+        System.out.println((double)totalTime/1_000_000_000.0);
+        System.out.println(children);
+        assertTrue(new Board("123450678").equals(children.get(0)));
+        assertTrue(new Board("123475608").equals(children.get(1)));
+        assertTrue(new Board("123045678").equals(children.get(2)));
+        assertTrue(new Board("103425678").equals(children.get(3)));
         
     }
 
-    @Test (timeout = 1000)
+    @Test (timeout = 10000)
     public void testSolve(){
         //aplicar 1 exemplo do prof
         /**
@@ -114,12 +116,12 @@ public class PuzzleUnitTests {
         Board b = new Board("123780456");
         State last = null;
         BestFirst bf = new BestFirst();
-        Iterator<State> itr = bf.solve(b, new Board("123045786"));
+        Iterator<State> itr = bf.solve(b, new Board("123450786"));
         long endTime   = System.nanoTime();
         long totalTime = endTime - startTime;
         System.out.println((double)totalTime/1_000_000_000.0);
         while(itr.hasNext()) last=itr.next();
-        assertEquals((int)16,(int)last.getG());
+        assertEquals((int)18,(int)last.getG());
     }
 }
 

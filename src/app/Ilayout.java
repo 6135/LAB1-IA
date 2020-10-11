@@ -23,10 +23,6 @@ public interface Ilayout {
      */
     String toString();
     /**
-     * @return the long form of the Ilayout
-     */
-    String toStringLong();
-    /**
      * @return comparison function so that contains works properly
      */
     boolean equals(Ilayout I);

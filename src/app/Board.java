@@ -1,128 +1,121 @@
 package app;
-
 import java.util.ArrayList;
 import java.util.List;
 
 public class Board implements Ilayout, Cloneable {
-    private static final int dim=3;
-    private int board[][];
-    String s="";
-    String boardFormat="";
-    int empty;
-    
-    public Board(){
-        board = new int[dim][dim];
-    }
-    
-    public Board (String str) throws IllegalStateException{
-        if(str.length() != dim*dim) throw new IllegalStateException("Invalid arg in Board constructor");
-        
-        board = new int[dim][dim];
-        s = str;
-        int si=0;
-        for(int i=0;i<dim;i++)
-            for(int j=0;j<dim;j++){
-                if(str.charAt(si)=='0')
-                    empty=si;
-                board[i][j] = Character.getNumericValue(str.charAt(si++));
-               
-            }
+    private String s="";
+    private String boardFormat="";
+	private int zeroR;
+	private int zeroC;
+	private static final int dim = 3;
+	int board[][];
 
-    }
-    @Override
-    public String toString() {
-        if(boardFormat.equals("")){
-            String s = toStringLong();
-            for(int i = 0; i < s.length(); i++){
-                char c = s.charAt(i);
-                if(s.charAt(i) == '0')
-                    boardFormat+=" ";
-                else boardFormat+=c;
-                if((i+1)%dim == 0)
-                    boardFormat+="\r\n";
-            }
-        }
-        return boardFormat;
-    }
+	public Board() {
+		board = new int[dim][dim];
+	}
 
-    @Override
-    public String toStringLong(){
-        return s;
-    }
+	public Board(String str) throws IllegalStateException {
 
-    @Override
-    public List<Ilayout> children() {
-        List<Ilayout> children = new ArrayList<>(); 
-        int col = empty%dim;
-        int row = (int)empty/dim;
-        
-        if(row>0) children.add(up(row,col)); 
-        if(row<dim-1) children.add(down(row,col));
-        if(col<dim-1) children.add(right(row,col)); 
-        if(col>0) children.add(left(row,col));
+		if (str.length() != dim * dim)
+			throw new IllegalStateException("Invalid arg in Board constructor");
+		board = new int[dim][dim];
+		int si = 0;
 
-        return children;
-    }
+		for (int i = 0; i < dim; i++)
+			for (int j = 0; j < dim; j++){
+				board[i][j] = Character.getNumericValue(str.charAt(si++));
+			
+				if(board[i][j] == 0){
+					zeroR = i;
+					zeroC = j;
+				}
+			}
+	}
+
+	public Board(int[][] b) {
+		board = new int[dim][dim];
+		for (int r = 0; r < dim; r++) {
+			for (int c = 0; c < dim; c++) {
+				board[r][c] = b[r][c];
+
+				if(board[r][c] == 0){
+					zeroR = r;
+					zeroC = c;
+				}
+			}
+		}
+	}
+
     /**
      * Implemented for good measure
      * @return the hash code of the given board
      */
     @Override
     public int hashCode() {
-        return toStringLong().hashCode();
-    }
+		return toString().hashCode();
+	}
     /**
-     * Since isGoal is already a comparison fuction, this one simply calls {@link #isGoal()}
      * @return comparison function so that contains works properly
      */
-    @Override
-    public boolean equals(Ilayout I){
-        return isGoal(I);
+	@Override
+	public boolean equals(Ilayout I) {
+		return isGoal(I);
+	}
+    /**
+     * @return true if the receiver equals the argument 'I'; return false otherwise
+     */	
+	public boolean isGoal(Ilayout l) {
+		return toString().equals(l.toString());
+	}
+
+	@Override
+	public double getG() {
+		return 1.0;					
+	}
+
+	@Override
+	public List<Ilayout> children() {
+																	
+        List<Ilayout> list = new ArrayList<>();
+        //System.out.println(zeroR);              
+		//System.out.println(zeroC);
+		if(zeroC < dim-1) list.add(new Board(movCopy(board,zeroR,zeroC+1)));
+		if(zeroR < dim-1) list.add(new Board(movCopy(board,zeroR+1,zeroC)));
+		if(zeroC > 0) list.add(new Board(movCopy(board,zeroR,zeroC-1)));
+		if(zeroR > 0) list.add(new Board(movCopy(board,zeroR-1,zeroC)));
+		return list;
+	}
+
+	@Override
+	public String toString() {
+		String result = "";
+		for (int i = 0; i < dim; i++) {
+			for (int j = 0; j < dim; j++) {
+				if (board[i][j] == 0) {
+					result += " ";
+				} else {
+					result += board[i][j];
+				}
+			}
+			result += "\r\n";
+		}
+		return result;
+	}
+
+    private int[][] movCopy(int[][] old, int newZeroR, int newZeroC){
+        //System.out.println(newZeroR + " " + newZeroC);
+        int[][] temp = new int[dim][dim];
+        for(int r = 0; r < dim; r++)
+            for(int c = 0; c < dim; c++){
+                if(r == newZeroR && c == newZeroC){
+                    temp[r][c] = 0;
+				} else if(old[r][c] == 0) {
+					temp[r][c] = old[newZeroR][newZeroC];
+				}
+                else temp[r][c] = old[r][c];
+            }
+        return temp;
     }
 
-    @Override
-    public boolean isGoal(Ilayout I) {
-        if(toString().equals(I.toString())) return true;
-        else return false;
-    }
 
-    @Override
-    public double getG() {
-        return 1;
-    }
-
-    private Ilayout up( int row,int col){
-        int newEmpty = col+(row-1)*dim;
-        Board child = new Board(movement(newEmpty));   
-
-        return child;
-    }
-
-    private Ilayout down(int row, int col){
-        int newEmpty = col+(row+1)*dim;
-        Board child = new Board(movement(newEmpty));  
-
-        return child;
-    }
-
-    private Ilayout right(int row,int col){
-        int newEmpty = (col+1)+row*dim;
-        Board child = new Board(movement(newEmpty)); 
-            
-        return child;
-    }
-
-    private Ilayout left(int row,int col){
-        int newEmpty = (col-1)+row*dim;
-        Board child = new Board(movement(newEmpty)); 
-            
-        return child;
-    }
-
-    private String movement(int newEmpty){
-        StringBuilder str = new StringBuilder(s);
-        str.setCharAt(empty,s.charAt(newEmpty));
-        str.setCharAt(newEmpty, '0');
-        return str.toString();
-    }
 }
