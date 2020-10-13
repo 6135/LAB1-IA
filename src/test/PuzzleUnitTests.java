@@ -50,4 +50,19 @@ public class PuzzleUnitTests {
         assertTrue(childrenString.contains("123475608"));   
         
     }
+
+    @Test
+    public void testUp(){
+        Board b = new Board("123405678");
+        List<Ilayout> children = new ArrayList<Ilayout>();
+        children.addAll(b.children());
+        List<String> childrenString = new ArrayList<String>();
+        for(Ilayout l : children)
+            childrenString.add(l.toStringLong());
+        assertTrue(childrenString.contains("103425678"));
+        assertTrue(childrenString.contains("123045678"));
+        assertTrue(childrenString.contains("123450678"));
+        assertTrue(childrenString.contains("123475608"));   
+        
+    } 
 }
