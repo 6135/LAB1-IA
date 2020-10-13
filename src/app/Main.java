@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 public class Main {
     public static void main (String [] args) {
-       /* Scanner sc = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
 
         BestFirst s = new BestFirst();
         Iterator<BestFirst.State> it = s.solve(new Board(sc.next()),new Board(sc.next()));
@@ -15,13 +15,13 @@ public class Main {
             while(it.hasNext()){
                 BestFirst.State i = it.next();
                 System.out.println(i);
-                if(!it.hasNext()) System.out.println(i.getG());
+                if(!it.hasNext()) System.out.println((int)i.getG());
             }
         }
-        sc.close();*/
-        Board test = new Board("123405678");
+        sc.close();
+        /*Board test = new Board("123405678");
         test.children();
-        /*List<String> list = new ArrayList<String>();
+        List<String> list = new ArrayList<String>();
         list.add("1");
         list.add("12");
         list.add("123");
@@ -30,8 +30,6 @@ public class Main {
         Iterator<String> itr = list.iterator();
         while(itr.hasNext())
             System.out.println(itr.next());*/
-
-        
     }
 
 } 
